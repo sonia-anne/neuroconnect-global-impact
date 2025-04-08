@@ -35,8 +35,41 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 st.title("🌍 NeuroConnect: Global Impact & Cost-Effectiveness Dashboard")
 
 # =====================
+# Mapa de Prevalencia (PRIMER PLANO)
+# =====================
+st.markdown("""
+### 🌐 **Global Autism Prevalence & Equity Heatmap**
+Visualizing regions with diagnosed prevalence and diagnostic invisibility.
+""")
+country_data = pd.DataFrame({
+    "Country": ["United States", "United Kingdom", "South Korea", "Ecuador", "Nigeria", "Bangladesh"],
+    "Prevalence": [27.8, 20.0, 17.5, 2.0, 1.2, 1.0]  # per 1,000 children
+})
+fig_map = px.choropleth(
+    country_data,
+    locations="Country",
+    locationmode="country names",
+    color="Prevalence",
+    color_continuous_scale=px.colors.sequential.Turbo,
+    title="🧭 Autism Prevalence per 1,000 Children (WHO + CDC Data)",
+    template='plotly_dark'
+)
+fig_map.update_layout(
+    paper_bgcolor="#0d1117",
+    plot_bgcolor="#0d1117",
+    font=dict(color='white'),
+    geo=dict(bgcolor='#0d1117'),
+    title_font=dict(size=24, color='white')
+)
+st.plotly_chart(fig_map, use_container_width=True)
+
+# =====================
 # Comparación de Costos
 # =====================
+st.markdown("""
+### 💰 **Cost vs. Effectiveness of Autism Treatments**
+Compare how many patients can be treated per $100,000 and how effective each intervention is.
+""")
 data = {
     "Treatment": ["NeuroConnect", "ABA Therapy", "Pharmacotherapy"],
     "Cost per Patient (USD)": [2500, 1200000, 12500],
@@ -48,7 +81,7 @@ fig = go.Figure()
 fig.add_trace(go.Bar(x=df['Treatment'], y=df['Patients per 100K USD'], name='Patients per $100K'))
 fig.add_trace(go.Bar(x=df['Treatment'], y=df['Effectiveness (%)'], name='Effectiveness (%)'))
 fig.update_layout(
-    title={"text": "🧠 Cost vs Effectiveness (per $100,000)", "font": {"color": "white"}},
+    title={"text": "📈 Cost-Effectiveness Comparison", "font": {"color": "white"}},
     barmode='group',
     template='plotly_dark',
     paper_bgcolor='#0d1117',
@@ -56,31 +89,6 @@ fig.update_layout(
     font=dict(color='white')
 )
 st.plotly_chart(fig, use_container_width=True)
-
-# =====================
-# Mapa de Prevalencia
-# =====================
-st.subheader("📊 Autism Prevalence by Country")
-country_data = pd.DataFrame({
-    "Country": ["United States", "United Kingdom", "South Korea", "Ecuador", "Nigeria", "Bangladesh"],
-    "Prevalence": [27.8, 20.0, 17.5, 2.0, 1.2, 1.0]  # per 1,000 children
-})
-fig_map = px.choropleth(
-    country_data,
-    locations="Country",
-    locationmode="country names",
-    color="Prevalence",
-    color_continuous_scale="Viridis",
-    title="🌍 Autism Prevalence per 1,000 Children",
-    template='plotly_dark'
-)
-fig_map.update_layout(
-    paper_bgcolor="#0d1117",
-    plot_bgcolor="#0d1117",
-    font=dict(color='white'),
-    geo=dict(bgcolor='#0d1117')
-)
-st.plotly_chart(fig_map, use_container_width=True)
 
 # ===========================
 # Inequity bubble map
