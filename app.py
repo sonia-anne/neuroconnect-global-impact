@@ -1,20 +1,26 @@
-# neuroconnect_dashboard/app.py
+# NEUROCONNECT: Cost-Scalability Dashboard — APP.PY COMPLETO Y ACTUALIZADO
 
+# Imports
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 import numpy as np
+import networkx as nx
+from pyvis.network import Network
+import streamlit.components.v1 as components
+import tempfile
+import os
 
-# Page config
+# CONFIGURACIÓN GENERAL
 st.set_page_config(page_title="NeuroConnect Global Impact Dashboard", layout="wide")
 
-# Dark theme
+# MODO OSCURO TOTAL
 st.markdown("""
 <style>
 body, .stApp {
     background-color: #0d1117;
-    color: #ffffff;
+    color: white;
 }
 h1, h2, h3, h4, h5, h6, p, span, div {
     color: white !important;
@@ -28,7 +34,9 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 st.title("🌍 NeuroConnect: Global Impact & Cost-Effectiveness Dashboard")
 
-# Cost comparison chart
+# =====================
+# Comparación de Costos
+# =====================
 data = {
     "Treatment": ["NeuroConnect", "ABA Therapy", "Pharmacotherapy"],
     "Cost per Patient (USD)": [2500, 1200000, 12500],
@@ -49,7 +57,9 @@ fig.update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
-# Global choropleth map of autism prevalence
+# =====================
+# Mapa de Prevalencia
+# =====================
 st.subheader("📊 Autism Prevalence by Country")
 country_data = pd.DataFrame({
     "Country": ["United States", "United Kingdom", "South Korea", "Ecuador", "Nigeria", "Bangladesh"],
@@ -72,7 +82,9 @@ fig_map.update_layout(
 )
 st.plotly_chart(fig_map, use_container_width=True)
 
+# ===========================
 # Inequity bubble map
+# ===========================
 st.subheader("🌐 Inequity in Diagnosis Access")
 bubble_df = pd.DataFrame({
     "Country": ["Nigeria", "Peru", "India", "Ghana", "UK", "USA"],
@@ -100,7 +112,9 @@ fig_bubble.update_layout(
 )
 st.plotly_chart(fig_bubble, use_container_width=True)
 
-# Accessibility radar chart
+# ===========================
+# Gráfico de Radar Accesibilidad
+# ===========================
 st.subheader("📡 Accessibility to Autism Care: USA vs Nigeria")
 radar = pd.DataFrame({
     'Factor': ['Diagnostics', 'Therapy Innovation', 'Trained Staff', 'Infrastructure', 'Funding'],
@@ -124,7 +138,16 @@ fig_radar.update_layout(
 )
 st.plotly_chart(fig_radar, use_container_width=True)
 
+# ===========================
+# Mensaje Final
+# ===========================
 st.markdown("""
 ✅ **Conclusion:**  
 > NeuroConnect is not just frontier science. It's global medical justice.
+
+**Data Sources:**  
+- CDC (2023)  
+- NHS (2022)  
+- OMS (2022)  
+- UNICEF (2024)
 """)
