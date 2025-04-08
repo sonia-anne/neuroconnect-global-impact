@@ -1,4 +1,3 @@
-
 # neuroconnect_dashboard/app.py
 
 import streamlit as st
@@ -20,6 +19,10 @@ body, .stApp {
 h1, h2, h3, h4, h5, h6, p, span, div {
     color: white !important;
 }
+.plot-container {
+    background-color: #0d1117 !important;
+    border: none !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -37,10 +40,11 @@ fig = go.Figure()
 fig.add_trace(go.Bar(x=df['Treatment'], y=df['Patients per 100K USD'], name='Patients per $100K'))
 fig.add_trace(go.Bar(x=df['Treatment'], y=df['Effectiveness (%)'], name='Effectiveness (%)'))
 fig.update_layout(
-    title="🧠 Cost vs Effectiveness (per $100,000)",
+    title={"text": "🧠 Cost vs Effectiveness (per $100,000)", "font": {"color": "white"}},
     barmode='group',
     template='plotly_dark',
     paper_bgcolor='#0d1117',
+    plot_bgcolor='#0d1117',
     font=dict(color='white')
 )
 st.plotly_chart(fig, use_container_width=True)
@@ -60,7 +64,12 @@ fig_map = px.choropleth(
     title="🌍 Autism Prevalence per 1,000 Children",
     template='plotly_dark'
 )
-fig_map.update_layout(paper_bgcolor="#0d1117", font=dict(color='white'))
+fig_map.update_layout(
+    paper_bgcolor="#0d1117",
+    plot_bgcolor="#0d1117",
+    font=dict(color='white'),
+    geo=dict(bgcolor='#0d1117')
+)
 st.plotly_chart(fig_map, use_container_width=True)
 
 # Inequity bubble map
@@ -83,7 +92,12 @@ fig_bubble = px.scatter_geo(
     template='plotly_dark',
     projection="natural earth"
 )
-fig_bubble.update_layout(paper_bgcolor="#0d1117", font=dict(color='white'))
+fig_bubble.update_layout(
+    paper_bgcolor="#0d1117",
+    plot_bgcolor="#0d1117",
+    font=dict(color='white'),
+    geo=dict(bgcolor='#0d1117')
+)
 st.plotly_chart(fig_bubble, use_container_width=True)
 
 # Accessibility radar chart
