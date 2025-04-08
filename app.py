@@ -39,20 +39,6 @@ st.markdown("""
 # Mapa 3D Principal - Pydeck + Deck.gl
 # ================================
 st.subheader("🌐 3D Satellite Map: Kits Distributed & Diagnostic Inequity")
-st.markdown("""
-📉 **Why it matters today (2025):**
-- Over **4.2 million children** remain undiagnosed globally.
-- **82%** of undiagnosed cases are in countries without universal screening.
-- NeuroConnect proposes a **cost-effective model**: $2,500 per child vs. $1.2M for lifelong ABA therapy.
-- In 2025, for every 1 child diagnosed in the U.S., **12 remain invisible in Africa**.
-
-#### **Country-Specific Data Highlights:**
-- 🇺🇸 **USA**: 9,000 kits distributed; ~120,000 undiagnosed children despite a diagnostic rate of 1 in 36 (CDC, 2023).
-- 🇰🇪 **Kenya**: 500 kits; 98,000 estimated undiagnosed due to limited infrastructure (WHO Africa, 2022).
-- 🇳🇬 **Nigeria**: Only 250 kits; over 1 million undiagnosed — <10% access to diagnostic services (UNICEF, 2023).
-- 🇵🇪 **Peru**: 450 kits; ~300,000 children estimated undiagnosed, especially in the Amazon region.
-- 🇮🇳 **India**: 1,300 kits; over 1.4 million undiagnosed due to rural/urban disparity and clinician shortages.
-""")
 
 data = pd.DataFrame({
     'lat': [37.0902, -1.2921, 6.5244, -12.0464, 28.6139],
@@ -86,6 +72,21 @@ st.pydeck_chart(pdk.Deck(
     layers=[layer],
     tooltip={"text": "{region}: {kits_distributed} kits, {undiagnosed_cases} undiagnosed children"}
 ))
+
+# Tabla comparativa de impacto y accesibilidad
+st.subheader("📊 Global Autism Inequity Pyramid (2025)")
+table_df = pd.DataFrame({
+    'Country': ['USA', 'India', 'Nigeria', 'Peru', 'Kenya'],
+    'Kits Distributed': [9000, 1300, 250, 450, 500],
+    'Estimated Undiagnosed': [120000, 1400000, 1050000, 300000, 98000],
+    'Access Level': ['High', 'Medium', 'Low', 'Low', 'Low']
+})
+fig_table = go.Figure(data=[go.Table(
+    header=dict(values=list(table_df.columns), fill_color='#1f77b4', font=dict(color='white'), align='left'),
+    cells=dict(values=[table_df[col] for col in table_df.columns], fill_color='#111111', align='left', font=dict(color='white'))
+)])
+fig_table.update_layout(paper_bgcolor='#0d1117')
+st.plotly_chart(fig_table, use_container_width=True)
 
 # ================================
 # Choropleth Heatmap - Plotly Express
