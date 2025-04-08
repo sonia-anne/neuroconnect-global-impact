@@ -39,6 +39,21 @@ st.markdown("""
 # Mapa 3D Principal - Pydeck + Deck.gl
 # ================================
 st.subheader("🌐 3D Satellite Map: Kits Distributed & Diagnostic Inequity")
+st.markdown("""
+📉 **Why it matters today (2025):**
+- Over **4.2 million children** remain undiagnosed globally.
+- **82%** of undiagnosed cases are in countries without universal screening.
+- NeuroConnect proposes a **cost-effective model**: $2,500 per child vs. $1.2M for lifelong ABA therapy.
+- In 2025, for every 1 child diagnosed in the U.S., **12 remain invisible in Africa**.
+
+#### **Country-Specific Data Highlights:**
+- 🇺🇸 **USA**: 9,000 kits distributed; ~120,000 undiagnosed children despite a diagnostic rate of 1 in 36 (CDC, 2023).
+- 🇰🇪 **Kenya**: 500 kits; 98,000 estimated undiagnosed due to limited infrastructure (WHO Africa, 2022).
+- 🇳🇬 **Nigeria**: Only 250 kits; over 1 million undiagnosed — <10% access to diagnostic services (UNICEF, 2023).
+- 🇵🇪 **Peru**: 450 kits; ~300,000 children estimated undiagnosed, especially in the Amazon region.
+- 🇮🇳 **India**: 1,300 kits; over 1.4 million undiagnosed due to rural/urban disparity and clinician shortages.
+""")
+
 data = pd.DataFrame({
     'lat': [37.0902, -1.2921, 6.5244, -12.0464, 28.6139],
     'lon': [-95.7129, 36.8219, 3.3792, -77.0428, 77.2090],
